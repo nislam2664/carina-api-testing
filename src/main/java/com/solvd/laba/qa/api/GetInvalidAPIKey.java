@@ -1,5 +1,6 @@
 package com.solvd.laba.qa.api;
 
+import com.solvd.laba.qa.configuration.WeatherProperties;
 import com.zebrunner.carina.api.AbstractApiMethodV2;
 import com.zebrunner.carina.api.annotation.Endpoint;
 import com.zebrunner.carina.api.annotation.ResponseTemplatePath;
@@ -10,8 +11,6 @@ import com.zebrunner.carina.utils.config.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.util.Properties;
 
@@ -22,19 +21,12 @@ public class GetInvalidAPIKey extends AbstractApiMethodV2 {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     public GetInvalidAPIKey() {
-        Properties properties = new Properties();
-        String weatherFile = "src/test/resources/api_weather/weather.properties";
-
-        try (FileInputStream fis = new FileInputStream(weatherFile)) {
-            properties.load(fis);
-        } catch (IOException e) {
-            LOGGER.error("Could not find " + weatherFile + " ...");
-            LOGGER.error(e.toString());
-        }
+        Properties properties = WeatherProperties.getProperties();
 
         replaceUrlPlaceholder("base_url", Configuration.getRequired("api_url"));
         replaceUrlPlaceholder("city_id", properties.getProperty("city_id"));
         replaceUrlPlaceholder("api_key", properties.getProperty("invalid_api_key"));
+        LOGGER.info("URL placeholder replacement successful");
     }
 
 }
