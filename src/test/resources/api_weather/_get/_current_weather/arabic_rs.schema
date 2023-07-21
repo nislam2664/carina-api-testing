@@ -17,22 +17,6 @@
         "lat"
       ]
     },
-    "weather": {
-      "type": "array",
-      "items": [
-        {
-          "type": "object",
-          "properties": {
-            "description": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "description"
-          ]
-        }
-      ]
-    },
     "timezone": {
       "type": "integer"
     },
@@ -48,7 +32,6 @@
   },
   "required": [
     "coord",
-    "weather",
     "timezone",
     "id",
     "name",
