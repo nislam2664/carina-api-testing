@@ -14,7 +14,7 @@
 
 	<test name="Weather API tests">
 		<classes>
-			<class name="com.solvd.laba.qa.api_test.WeatherAPITest" />
+			<class name="com.solvd.laba.qa.WeatherAPITest" />
 		</classes>
 	</test>
 
