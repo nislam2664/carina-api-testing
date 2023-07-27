@@ -1,4 +1,4 @@
-package com.solvd.laba.qa.configuration;
+package com.solvd.laba.qa.api;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ public class WeatherProperties {
 
     public static void initialize() {
         properties = new Properties();
-        String weatherFile = "src/test/resources/api_weather/weather.properties";
+        String weatherFile = "src/test/resources/api/weather.properties";
 
         try (FileInputStream fis = new FileInputStream(weatherFile)) {
             properties.load(fis);

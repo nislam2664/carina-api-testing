@@ -1,6 +1,6 @@
-package com.solvd.laba.qa.api;
+package com.solvd.laba.qa.api.get;
 
-import com.solvd.laba.qa.configuration.WeatherProperties;
+import com.solvd.laba.qa.api.WeatherProperties;
 import com.zebrunner.carina.api.AbstractApiMethodV2;
 import com.zebrunner.carina.api.annotation.Endpoint;
 import com.zebrunner.carina.api.annotation.ResponseTemplatePath;
@@ -14,20 +14,19 @@ import org.slf4j.LoggerFactory;
 import java.lang.invoke.MethodHandles;
 import java.util.Properties;
 
-@Endpoint(url = "${base_url}/${geo_ver}/zip?zip=${zip_code},${country_code}&appid=${api_key}", methodType = HttpMethodType.GET)
-@ResponseTemplatePath(path = "api_weather/_get/rs_geo.json")
-@SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
-public class GetGeocodeByZip extends AbstractApiMethodV2 {
+@Endpoint(url = "${base_url}/${data_ver}/weather?q=${city_name}&appid=${api_key}", methodType = HttpMethodType.GET)
+@ResponseTemplatePath(path = "api/_get/rs.json")
+@SuccessfulHttpStatus(status = HttpResponseStatusType.NOT_FOUND_404)
+public class GetNullCity extends AbstractApiMethodV2 {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    public GetGeocodeByZip() {
+    public GetNullCity() {
         Properties properties = WeatherProperties.getProperties();
 
         replaceUrlPlaceholder("base_url", Configuration.getRequired("base_url"));
-        replaceUrlPlaceholder("geo_ver", Configuration.getRequired("geo_ver"));
+        replaceUrlPlaceholder("data_ver", Configuration.getRequired("data_ver"));
         replaceUrlPlaceholder("api_key", Configuration.getRequired("key"));
-        replaceUrlPlaceholder("zip_code", properties.getProperty("zip_code"));
-        replaceUrlPlaceholder("country_code", properties.getProperty("country_code"));
+        replaceUrlPlaceholder("city_name", properties.getProperty("invalid_city"));
         LOGGER.info("URL placeholder replacement successful");
     }
 

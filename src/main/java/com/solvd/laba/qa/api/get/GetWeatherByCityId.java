@@ -1,6 +1,6 @@
-package com.solvd.laba.qa.api;
+package com.solvd.laba.qa.api.get;
 
-import com.solvd.laba.qa.configuration.WeatherProperties;
+import com.solvd.laba.qa.api.WeatherProperties;
 import com.zebrunner.carina.api.AbstractApiMethodV2;
 import com.zebrunner.carina.api.annotation.Endpoint;
 import com.zebrunner.carina.api.annotation.ResponseTemplatePath;
@@ -15,18 +15,18 @@ import java.lang.invoke.MethodHandles;
 import java.util.Properties;
 
 @Endpoint(url = "${base_url}/${data_ver}/weather?id=${city_id}&appid=${api_key}", methodType = HttpMethodType.GET)
-@ResponseTemplatePath(path = "api_weather/_get/rs.json")
-@SuccessfulHttpStatus(status = HttpResponseStatusType.UNAUTHORIZED_401)
-public class GetInvalidAPIKey extends AbstractApiMethodV2 {
+@ResponseTemplatePath(path = "api/_get/rs.json")
+@SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
+public class GetWeatherByCityId extends AbstractApiMethodV2 {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    public GetInvalidAPIKey() {
+    public GetWeatherByCityId(int id) {
         Properties properties = WeatherProperties.getProperties();
 
         replaceUrlPlaceholder("base_url", Configuration.getRequired("base_url"));
         replaceUrlPlaceholder("data_ver", Configuration.getRequired("data_ver"));
-        replaceUrlPlaceholder("city_id", properties.getProperty("city_id"));
-        replaceUrlPlaceholder("api_key", properties.getProperty("invalid_key"));
+        replaceUrlPlaceholder("api_key", Configuration.getRequired("key"));
+        replaceUrlPlaceholder("city_id", String.valueOf(id));
         LOGGER.info("URL placeholder replacement successful");
     }
 

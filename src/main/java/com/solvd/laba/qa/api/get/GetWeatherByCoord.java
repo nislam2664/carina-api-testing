@@ -1,6 +1,6 @@
-package com.solvd.laba.qa.api;
+package com.solvd.laba.qa.api.get;
 
-import com.solvd.laba.qa.configuration.WeatherProperties;
+import com.solvd.laba.qa.api.WeatherProperties;
 import com.zebrunner.carina.api.AbstractApiMethodV2;
 import com.zebrunner.carina.api.annotation.Endpoint;
 import com.zebrunner.carina.api.annotation.ResponseTemplatePath;
@@ -14,23 +14,22 @@ import org.slf4j.LoggerFactory;
 import java.lang.invoke.MethodHandles;
 import java.util.Properties;
 
-@Endpoint(url = "${base_url}/${data_ver}/air_pollution/history?lat=${lat}&lon=${lon}&start=${start}&end=${end}&appid=${api_key}", methodType = HttpMethodType.GET)
-@ResponseTemplatePath(path = "api_weather/_get/rs.json")
+@Endpoint(url = "${base_url}/${data_ver}/weather?lat=${lat}&lon=${lon}&appid=${api_key}", methodType = HttpMethodType.GET)
+@ResponseTemplatePath(path = "api/_get/rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
-public class GetHistoricalAirPollution extends AbstractApiMethodV2 {
+public class GetWeatherByCoord extends AbstractApiMethodV2 {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    public GetHistoricalAirPollution() {
+    public GetWeatherByCoord(double lat, double lon) {
         Properties properties = WeatherProperties.getProperties();
 
         replaceUrlPlaceholder("base_url", Configuration.getRequired("base_url"));
         replaceUrlPlaceholder("data_ver", Configuration.getRequired("data_ver"));
         replaceUrlPlaceholder("api_key", Configuration.getRequired("key"));
-        replaceUrlPlaceholder("lat", properties.getProperty("lat"));
-        replaceUrlPlaceholder("lon", properties.getProperty("lon"));
-        replaceUrlPlaceholder("start", properties.getProperty("start"));
-        replaceUrlPlaceholder("end", properties.getProperty("end"));
+        replaceUrlPlaceholder("lat", String.valueOf(lat));
+        replaceUrlPlaceholder("lon", String.valueOf(lon));
         LOGGER.info("URL placeholder replacement successful");
     }
 
 }
+
