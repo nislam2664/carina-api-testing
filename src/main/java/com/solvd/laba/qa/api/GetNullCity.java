@@ -14,20 +14,19 @@ import org.slf4j.LoggerFactory;
 import java.lang.invoke.MethodHandles;
 import java.util.Properties;
 
-@Endpoint(url = "${base_url}/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=${units}", methodType = HttpMethodType.GET)
-@ResponseTemplatePath(path = "api_weather/_get/_current_weather/invalid_rs.json")
-@SuccessfulHttpStatus(status = HttpResponseStatusType.BAD_REQUEST_400)
-public class GetWeatherByInvalidCoord extends AbstractApiMethodV2 {
+@Endpoint(url = "${base_url}/${data_ver}/weather?q=${city_name}&appid=${api_key}", methodType = HttpMethodType.GET)
+@ResponseTemplatePath(path = "api_weather/_get/rs.json")
+@SuccessfulHttpStatus(status = HttpResponseStatusType.NOT_FOUND_404)
+public class GetNullCity extends AbstractApiMethodV2 {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    public GetWeatherByInvalidCoord() {
+    public GetNullCity() {
         Properties properties = WeatherProperties.getProperties();
 
-        replaceUrlPlaceholder("base_url", Configuration.getRequired("api_url"));
-        replaceUrlPlaceholder("lat", properties.getProperty("wrong_lat"));
-        replaceUrlPlaceholder("lon", properties.getProperty("wrong_lon"));
-        replaceUrlPlaceholder("api_key", properties.getProperty("api_key"));
-        replaceUrlPlaceholder("units", properties.getProperty("units"));
+        replaceUrlPlaceholder("base_url", Configuration.getRequired("base_url"));
+        replaceUrlPlaceholder("data_ver", Configuration.getRequired("data_ver"));
+        replaceUrlPlaceholder("api_key", Configuration.getRequired("key"));
+        replaceUrlPlaceholder("city_name", properties.getProperty("invalid_city"));
         LOGGER.info("URL placeholder replacement successful");
     }
 

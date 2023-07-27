@@ -1,0 +1,63 @@
+{
+    <#if coord??> "coord": {
+      "lon" : "regex:[-?[\\d]+]",
+      "lat" : "regex:[-?[\\d]+]"
+    }, </#if>
+    <#if list??> "list" :[
+      {
+        "main": {
+          "aqi": "skip"
+        },
+        "components": {
+          "co": "skip",
+          "no": "skip",
+          "no2": "skip",
+          "o3": "skip",
+          "so2": "skip",
+          "pm2_5": "skip",
+          "pm10": "skip",
+          "nh3": "skip"
+        },
+        "dt": "skip"
+      }
+    ], </#if>
+    <#if weather??> "weather": [
+      {
+        "id": "regex:[\\d]",
+        "main": "regex:[a-zA-Z]",
+        "description": "regex:[a-zA-Z\\d]+",
+        "icon": "regex:[a-zA-Z\\d]+"
+      }
+    ],
+    "base": "skip",
+    "main": {
+      "temp": "skip",
+      "feels_like": "skip",
+      "temp_min": "skip",
+      "temp_max": "skip",
+      "pressure": "skip",
+      "humidity": "skip"
+    },
+    "visibility": "skip",
+    "wind": {
+      "speed": "skip",
+      "deg": "skip",
+      <#if gust??> "gust": "skip" </#if>
+    },
+    "clouds": {
+      "all": "skip"
+    },
+    "dt": "skip",
+    "sys": {
+      "type": "regex:[\\d]",
+      "id": "regex:[\\d]",
+      "country": "regex:[a-zA-Z]",
+      "sunrise": "regex:[\\d]",
+      "sunset": "regex:[\\d]"
+    },
+    "timezone": "regex:[-?[\\d]+]",
+    "id" : "regex:[\\d]",
+    "name" : "regex:[a-zA-Z]", </#if>
+    <#if cod??> "cod": "regex:[\\d]", </#if>
+    <#if message??> "message" : "regex:[a-zA-Z\\d]+" </#if>
+}

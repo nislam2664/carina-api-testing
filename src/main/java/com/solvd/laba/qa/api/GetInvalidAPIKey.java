@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 import java.lang.invoke.MethodHandles;
 import java.util.Properties;
 
-@Endpoint(url = "${base_url}/data/2.5/weather?id=${city_id}&appid=${api_key}", methodType = HttpMethodType.GET)
-@ResponseTemplatePath(path = "api_weather/_get/_api_key_authorization/rs.json")
+@Endpoint(url = "${base_url}/${data_ver}/weather?id=${city_id}&appid=${api_key}", methodType = HttpMethodType.GET)
+@ResponseTemplatePath(path = "api_weather/_get/rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.UNAUTHORIZED_401)
 public class GetInvalidAPIKey extends AbstractApiMethodV2 {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -23,9 +23,10 @@ public class GetInvalidAPIKey extends AbstractApiMethodV2 {
     public GetInvalidAPIKey() {
         Properties properties = WeatherProperties.getProperties();
 
-        replaceUrlPlaceholder("base_url", Configuration.getRequired("api_url"));
+        replaceUrlPlaceholder("base_url", Configuration.getRequired("base_url"));
+        replaceUrlPlaceholder("data_ver", Configuration.getRequired("data_ver"));
         replaceUrlPlaceholder("city_id", properties.getProperty("city_id"));
-        replaceUrlPlaceholder("api_key", properties.getProperty("invalid_api_key"));
+        replaceUrlPlaceholder("api_key", properties.getProperty("invalid_key"));
         LOGGER.info("URL placeholder replacement successful");
     }
 

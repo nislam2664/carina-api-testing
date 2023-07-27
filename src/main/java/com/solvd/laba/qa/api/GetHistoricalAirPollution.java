@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 import java.lang.invoke.MethodHandles;
 import java.util.Properties;
 
-@Endpoint(url = "${base_url}/data/2.5/air_pollution/history?lat=${lat}&lon=${lon}&start=${start}&end=${end}&appid=${api_key}", methodType = HttpMethodType.GET)
-@ResponseTemplatePath(path = "api_weather/_get/_historical_air_pollution/rs.json")
+@Endpoint(url = "${base_url}/${data_ver}/air_pollution/history?lat=${lat}&lon=${lon}&start=${start}&end=${end}&appid=${api_key}", methodType = HttpMethodType.GET)
+@ResponseTemplatePath(path = "api_weather/_get/rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
 public class GetHistoricalAirPollution extends AbstractApiMethodV2 {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -23,12 +23,13 @@ public class GetHistoricalAirPollution extends AbstractApiMethodV2 {
     public GetHistoricalAirPollution() {
         Properties properties = WeatherProperties.getProperties();
 
-        replaceUrlPlaceholder("base_url", Configuration.getRequired("api_url"));
+        replaceUrlPlaceholder("base_url", Configuration.getRequired("base_url"));
+        replaceUrlPlaceholder("data_ver", Configuration.getRequired("data_ver"));
+        replaceUrlPlaceholder("api_key", Configuration.getRequired("key"));
         replaceUrlPlaceholder("lat", properties.getProperty("lat"));
         replaceUrlPlaceholder("lon", properties.getProperty("lon"));
         replaceUrlPlaceholder("start", properties.getProperty("start"));
         replaceUrlPlaceholder("end", properties.getProperty("end"));
-        replaceUrlPlaceholder("api_key", properties.getProperty("api_key"));
         LOGGER.info("URL placeholder replacement successful");
     }
 
