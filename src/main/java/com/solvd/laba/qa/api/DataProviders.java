@@ -25,7 +25,7 @@ public class DataProviders {
     }
 
     @DataProvider(name = "coords")
-    public static Object[] getCoords() {
+    public static Object[][] getCoords() {
         Object[] lats = Arrays.stream(data).map(datum -> datum[2]).toArray();
         Object[] lons = Arrays.stream(data).map(datum -> datum[3]).toArray();
 
