@@ -1,4 +1,4 @@
-package com.solvd.laba.qa.gui.components.enums;
+package com.solvd.laba.qa.gui.components;
 
 public enum RedditHelpItem {
     ACCOUNT_STATUS ("Account Status"),

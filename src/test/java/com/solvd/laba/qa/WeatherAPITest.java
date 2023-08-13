@@ -11,6 +11,7 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.lang.invoke.MethodHandles;
 import java.util.Properties;
@@ -35,13 +36,16 @@ public class WeatherAPITest implements IAbstractTest {
 
         Properties properties = WeatherProperties.getProperties();
 
-        assertEquals(zip, Integer.parseInt(properties.getProperty("zip_code")), "Zip code is not as expected.");
-        assertEquals(name, properties.getProperty("city_name"), "City name is not as expected.");
-        assertEquals(lat, Double.parseDouble(properties.getProperty("lat")), "Latitude is not as expected.");
-        assertEquals(lat, Double.parseDouble(properties.getProperty("lat")), "Latitude is not as expected.");
-        assertEquals(country, properties.getProperty("country_code"), "Country code is not as expected.");
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertEquals(zip, Integer.parseInt(properties.getProperty("zip_code")), "Zip code is not as expected.");
+        softAssert.assertEquals(name, properties.getProperty("city_name"), "City name is not as expected.");
+        softAssert.assertEquals(lat, Double.parseDouble(properties.getProperty("lat")), "Latitude is not as expected.");
+        softAssert.assertEquals(lat, Double.parseDouble(properties.getProperty("lat")), "Latitude is not as expected.");
+        softAssert.assertEquals(country, properties.getProperty("country_code"), "Country code is not as expected.");
 
         api.validateResponse();
+        softAssert.assertAll();
     }
 
     @Test

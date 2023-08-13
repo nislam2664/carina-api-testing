@@ -1,4 +1,4 @@
-package com.solvd.laba.qa.gui.pages.desktop;
+package com.solvd.laba.qa.gui.pages.mobile;
 
 import com.solvd.laba.qa.gui.pages.common.*;
 import com.zebrunner.carina.utils.config.Configuration;
@@ -10,21 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.invoke.MethodHandles;
-import java.util.List;
-import java.util.Random;
 
-@DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = HomePageBase.class)
+@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = HomePageBase.class)
 public class HomePage extends HomePageBase {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @FindBy(xpath = "//section[@class=\"mt-md\"]")
     private ExtendedWebElement popularCommunitiesSection;
-
-    @FindBy(xpath = "//section/div/div/li/ul/li/a/span[1]/span[2]/span[1]/span")
-    private List<ExtendedWebElement> popularCommunitiesList;
-
-    @FindBy(id = "popular-communities-list-see-more")
-    private ExtendedWebElement seeMoreButton;
 
     @FindBy(id = "USER_DROPDOWN_ID")
     private ExtendedWebElement userDropdown;
@@ -42,22 +34,17 @@ public class HomePage extends HomePageBase {
 
     @Override
     public void clickSeeMorePopularCommunities() {
-        seeMoreButton.click();
+        throw new UnsupportedOperationException("Unused");
     }
 
     @Override
     public void selectRandomSubreddit() {
-        Random rand = new Random();
-        int element_num = rand.nextInt(popularCommunitiesList.size());
-        randomSubreddit = popularCommunitiesList.get(element_num);
+        throw new UnsupportedOperationException("Unused");
     }
 
     @Override
     public SubredditPageBase clickRandomSubreddit() {
-        randomSubreddit.scrollTo();
-        randomSubreddit.hover();
-        randomSubreddit.click();
-        return initPage(driver, SubredditPageBase.class);
+        throw new UnsupportedOperationException("Unused");
     }
 
     @Override
@@ -72,7 +59,7 @@ public class HomePage extends HomePageBase {
 
     @Override
     public void clickSeeMoreResources() {
-        getSidebar().clickSeeMore();
+        getSidebar().clickSeeMoreMobile();
     }
 
     @Override

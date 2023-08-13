@@ -1,15 +1,9 @@
 package com.solvd.laba.qa.gui.pages.desktop;
 
-import com.solvd.laba.qa.gui.components.header.HeaderMenuBase;
-import com.solvd.laba.qa.gui.components.header.HeaderMenuDesktop;
-import com.solvd.laba.qa.gui.pages.common.CommunitiesPageBase;
-import com.solvd.laba.qa.gui.pages.common.HomePageBase;
 import com.solvd.laba.qa.gui.pages.common.LogInPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +19,6 @@ public class LogInPage extends LogInPageBase {
 
     @FindBy(xpath = "//input[@id=\"loginPassword\"]")
     private ExtendedWebElement passwordInput;
-
-    @FindBy(xpath = "//button[@type=\"submit\"]")
-    private ExtendedWebElement submitButton;
 
     public LogInPage(WebDriver driver) {
         super(driver);
@@ -50,11 +41,5 @@ public class LogInPage extends LogInPageBase {
     @Override
     public void clickSubmit() {
         submitButton.click();
-    }
-
-    @Override
-    public HomePageBase returnToHomePage() {
-        CommunitiesPageBase communitiesPage = initPage(driver, CommunitiesPageBase.class);
-        return communitiesPage.returnToHomePage();
     }
 }

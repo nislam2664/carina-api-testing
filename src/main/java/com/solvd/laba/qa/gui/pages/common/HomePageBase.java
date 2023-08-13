@@ -1,32 +1,44 @@
 package com.solvd.laba.qa.gui.pages.common;
 
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
-import com.zebrunner.carina.webdriver.gui.AbstractPage;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public abstract class HomePageBase extends AbstractPage {
+import java.lang.invoke.MethodHandles;
+
+public abstract class HomePageBase extends RedditAbstractPage {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+
     public HomePageBase(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_URL);
+        LOGGER.info("Retrieving page URL");
+        setUiLoadedMarker(getHeader().getLogo());
+        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
     }
 
-    // HEADER MENU
-    public abstract LogInPageBase openLogIn();
-    public abstract GetAppPopUpBase openGetApp();
+    public void clickNavMenuButton() {
+        getHeader().clickNavMenuButton();
+    }
 
-    // FOOTER MENU
-    public abstract AboutPageBase openAboutPage();
-    public abstract HelpPageBase openHelpPage();
-    public abstract CommunitiesPageBase openCommunitiesPage();
-    public abstract ProfilePageBase upvotePost();
+    public HelpPageBase clickHelp() {
+        getSidebar().clickHelp();
+        return initPage(driver, HelpPageBase.class);
+    }
 
-    public abstract void clickBackToTop();
-    public abstract void selectAPost();
-    public abstract void writeComment();
-    public abstract boolean isHomeLogoExist();
+    public CommunitiesPageBase clickCommunities() {
+        getSidebar().clickCommunities();
+        return initPage(driver, CommunitiesPageBase.class);
+    }
+
+    public abstract boolean isPopularCommunitiesSectionExist();
+    public abstract void clickSeeMoreResources();
+    public abstract void clickSeeMorePopularCommunities();
+    public abstract void selectRandomSubreddit();
+    public abstract SubredditPageBase clickRandomSubreddit();
+    public abstract String getRandomSubredditName();
+    public abstract String getRandomSubredditURL();
     public abstract boolean isUserDropdownExist();
-    public abstract boolean isCreatePostVisible();
 
     @Override
     public void open() {
