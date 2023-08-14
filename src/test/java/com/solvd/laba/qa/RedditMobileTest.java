@@ -5,8 +5,6 @@ import com.solvd.laba.qa.gui.pages.common.*;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import com.zebrunner.carina.core.IAbstractTest;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
-import com.zebrunner.carina.core.registrar.tag.Priority;
-import com.zebrunner.carina.core.registrar.tag.TestPriority;
 import com.zebrunner.carina.utils.config.Configuration;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import org.slf4j.Logger;
@@ -25,8 +23,7 @@ public class RedditMobileTest implements IAbstractTest, IMobileUtils {
 
     @Test
     @MethodOwner(owner = "nislam")
-    @TestPriority(Priority.P2)
-    @TestLabel(name = "home page", value={"web", "functional"})
+    @TestLabel(name = "home page", value={"mobile", "functional"})
     public void testHomePage() {
         LOGGER.info("[TEST] Open Reddit Home Page");
         SoftAssert softAssert = new SoftAssert();
@@ -45,8 +42,7 @@ public class RedditMobileTest implements IAbstractTest, IMobileUtils {
 
     @Test
     @MethodOwner(owner = "nislam")
-    @TestPriority(Priority.P2)
-    @TestLabel(name = "community search bar", value={"web", "functional"})
+    @TestLabel(name = "community search bar", value={"mobile", "functional"})
     public void testCommunitySearchBar() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         SoftAssert softAssert = new SoftAssert();
@@ -70,8 +66,7 @@ public class RedditMobileTest implements IAbstractTest, IMobileUtils {
 
     @Test
     @MethodOwner(owner = "nislam")
-    @TestPriority(Priority.P2)
-    @TestLabel(name = "subreddit about specs", value={"web", "regression"})
+    @TestLabel(name = "subreddit about specs", value={"mobile", "regression"})
     public void testSubredditSpecs() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         SoftAssert softAssert = new SoftAssert();
@@ -98,8 +93,7 @@ public class RedditMobileTest implements IAbstractTest, IMobileUtils {
 
     @Test
     @MethodOwner(owner = "nislam")
-    @TestPriority(Priority.P2)
-    @TestLabel(name = "help page item selection", value={"web", "functional"})
+    @TestLabel(name = "help page item selection", value={"mobile", "functional"})
     public void testHelpPageWithItemSelection() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         SoftAssert softAssert = new SoftAssert();

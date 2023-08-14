@@ -4,13 +4,19 @@
 	<parameter name="suiteOwner" value="nislam"/>
 	<parameter name="jenkinsJobName" value="Reddit-Web-Test"/>
 	<parameter name="jenkinsJobType" value="api"/>
-	<parameter name="jenkinsEnvironments" value="DEMO"/>
+	<parameter name="jenkinsEnvironments" value="WEB"/>
 	<parameter name="jenkinsRegressionPipeline" value="api_regression, full_regression"/>
 	<parameter name="jenkinsJobExecutionMode" value="continue"/>
 
 	<test name="Reddit Web Tests">
 		<classes>
 			<class name="com.solvd.laba.qa.RedditWebTest" />
+		</classes>
+	</test>
+
+	<test name="Reddit Mobile Tests">
+		<classes>
+			<class name="com.solvd.laba.qa.RedditMobileTest" />
 		</classes>
 	</test>
 
